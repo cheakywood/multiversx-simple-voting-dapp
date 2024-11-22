@@ -1,0 +1,107 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.82.0",
+            "commitHash": "f6e511eec7342f59a25f7c0534f1dbea00d01b14",
+            "commitDate": "2024-10-15",
+            "channel": "Stable",
+            "short": "rustc 1.82.0 (f6e511eec 2024-10-15)"
+        },
+        "contractCrate": {
+            "name": "simple-voting",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.54.3"
+        }
+    },
+    "name": "VotingContract",
+    "constructor": {
+        "inputs": [
+            {
+                "name": "poll_question",
+                "type": "bytes"
+            },
+            {
+                "name": "options",
+                "type": "List<bytes>"
+            }
+        ],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "getPollQuestion",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bytes"
+                }
+            ]
+        },
+        {
+            "name": "getOptions",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<PollOption>"
+                }
+            ]
+        },
+        {
+            "name": "castVote",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "option_index",
+                    "type": "u32"
+                }
+            ],
+            "outputs": []
+        }
+    ],
+    "events": [
+        {
+            "identifier": "vote_cast",
+            "inputs": [
+                {
+                    "name": "vote_event",
+                    "type": "VoteCastEvent"
+                }
+            ]
+        }
+    ],
+    "esdtAttributes": [],
+    "hasCallback": false,
+    "types": {
+        "PollOption": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "name",
+                    "type": "bytes"
+                },
+                {
+                    "name": "vote_count",
+                    "type": "u64"
+                }
+            ]
+        },
+        "VoteCastEvent": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "voter",
+                    "type": "Address"
+                },
+                {
+                    "name": "option_name",
+                    "type": "bytes"
+                }
+            ]
+        }
+    }
+}
